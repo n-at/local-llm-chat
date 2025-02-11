@@ -1,0 +1,6 @@
+/.idea/
+/.vscode/
+/*.iml
+/logs/
+/src/node_modules/
+/src/models/

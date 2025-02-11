@@ -1,0 +1,11 @@
+services:
+  local-llm-chat:
+    image: "nginx:latest"
+    container_name: "local-llm-chat"
+    ports:
+      - "3000:80"
+    volumes:
+      - "./logs:/var/log/nginx"
+      - "./conf.d:/etc/nginx/conf.d"
+      - "./src:/opt/local-llm-chat"
+    restart: unless-stopped
