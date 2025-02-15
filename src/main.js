@@ -7,24 +7,12 @@ const models = {
     },
 };
 
-const languages = {
-    ru: {
-        name: 'Russian',
-    },
-    en: {
-        name: 'English',
-    },
-};
-
 function modelUrl(modelId) {
     if (!models[modelId]) {
         return null;
     }
     return `${location.origin}/models/${models[modelId].file}`;
 }
-
-const currentModelId = 'QVikhr-2.5-1.5B';
-const currentSystemPrompt = 'You are helpful digital assistant.';
 
 ///////////////////////////////////////////////////////////////////////////////
 
@@ -34,9 +22,11 @@ const currentSystemPrompt = 'You are helpful digital assistant.';
         'multi-thread/wllama.wasm' : './node_modules/@wllama/wllama/esm/multi-thread/wllama.wasm',
     };
 
+    const options = window.Options.options;
+    
     const wllama = new Wllama(CONFIG_PATHS);
 
-    await wllama.loadModelFromUrl(modelUrl(currentModelId), {
+    await wllama.loadModelFromUrl(modelUrl(options.model), {
         progressCallback: ({loaded, total}) => {
             window.Loading.perc(Math.round((loaded / total) * 100));
         },
@@ -46,7 +36,7 @@ const currentSystemPrompt = 'You are helpful digital assistant.';
     window.Loading.hide();
 
     // const messages = [
-    //     {role: 'system', content: currentSystemPrompt},
+    //     {role: 'system', content: options.system_prompt},
     //     {role: 'user', content: 'Почему трава зеленая?'},
     // ];
 
@@ -54,9 +44,11 @@ const currentSystemPrompt = 'You are helpful digital assistant.';
 
     // const output = await wllama.createChatCompletion(messages, {
     //     sampling: {
-    //         temp: 0.5,
-    //         top_k: 40,
-    //         top_p: 0.9,
+    //         temp: options.temp,
+    //         penalty_repeat: options.repeat_penalty,
+    //         top_k: options.top_k,
+    //         top_p: options.top_p,
+    //         min_p: options.min_p,
     //     },
     // });
 

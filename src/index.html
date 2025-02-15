@@ -70,7 +70,8 @@
                             </button>
                         </div>
                         <div>
-                            <button type="button" id="prompt-options" class="btn btn-outline-secondary" title="Options">
+                            <button type="button" id="prompt-options" class="btn btn-outline-secondary" title="Options"
+                                    data-bs-toggle="modal" data-bs-target="#options">
                                 <i class="bi bi-gear"></i>
                             </button>
                         </div>
@@ -80,7 +81,75 @@
         </div>
         
         <!-- options screen -->
-        <!-- TODO -->
+        <div id="options" class="modal" tabindex="-1">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Options</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <fieldset>
+                            <legend>Model</legend>
+                            <div class="form-floating mb-3">
+                                <select id="options-model" class="form-select">
+                                    <option value="QVikhr-2.5-1.5B">QVikhr-2.5-1.5B</option>
+                                </select>
+                                <label for="options-model">Model</label>
+                            </div>
+                            <div class="form-floating mb-3">
+                                <input type="text" id="options-system-prompt" class="form-control" placeholder="System prompt">
+                                <label for="options-system-prompt">System prompt</label>
+                            </div>
+                        </fieldset>
+                        <fieldset>
+                            <legend>Voice</legend>
+                            <div class="form-floating mb-3">
+                                <select id="options-voice-lang" class="form-select">
+                                    <option value="ru">Russian</option>
+                                    <option value="en">English</option>
+                                </select>
+                                <label for="options-voice-lang">Voice recognition language</label>
+                            </div>
+                            <div class="form-floating mb-3">
+                                <select id="options-speak-lang" class="form-select">
+                                    <option value="ru">Russian</option>
+                                    <option value="en">English</option>
+                                </select>
+                                <label for="options-speak-lang">Speak language</label>
+                            </div>
+                        </fieldset>
+                        <fieldset>
+                            <legend>Inference</legend>
+                            <div class="form-floating mb-3">
+                                <input type="number" id="options-temp" class="form-control" min="0" max="2" step="0.05" value="0.8" placeholder="temp">
+                                <label for="options-temp">Temperature</label>
+                            </div>
+                            <div class="form-floating mb-3">
+                                <input type="number" id="options-repeat-penalty" class="form-control" min="0" max="2" step="0.05" value="1.0" placeholder="repeat penalty">
+                                <label for="options-repeat-penalty">Repeat penalty</label>
+                            </div>
+                            <div class="form-floating mb-3">
+                                <input type="number" id="options-top-k" class="form-control" min="1" max="200" step="1" value="40" placeholder="top_k">
+                                <label for="options-top-k">top_k</label>
+                            </div>
+                            <div class="form-floating mb-3">
+                                <input type="number" id="options-top-p" class="form-control" min="0" max="1", step="0.01" value="0.9" placeholder="top_p">
+                                <label for="options-top-p">top_p</label>
+                            </div>
+                            <div class="form-floating">
+                                <input type="number" id="options-min-p" class="form-control" min="0" max="1" step="0.01" value="0.1" placeholder="min_p">
+                                <label for="options-min-p">min_p</label>
+                            </div>
+                        </fieldset>
+                    </div>
+                    <div class="modal-footer">
+                        <button id="options-defaults" type="button" class="btn btn-outline-secondary">Restore defaults</button>
+                        <button id="options-save" type="button" class="btn btn-primary">Save and reload</button>
+                    </div>
+                </div>
+            </div>
+        </div>
 
         <!-- script -->
         <script src="node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
