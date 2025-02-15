@@ -1,19 +1,14 @@
 (() => {
 
     window.Chat = {
-        ROLE_SYSTEM: 'system',
-        ROLE_USER: 'user',
-        ROLE_ASSISTANT: 'assistant',
-
         containerEl: null,
         messageEls: {},
-        lastMessageId: 0,
 
         init() {
             this.containerEl = document.getElementById('chat');
         },
 
-        addMessage(role, message, typing=false) {
+        addMessage(id, role, content, typing=false) {
             let messageBorderCls = 'border-secondary';
             let messageRoleCls = 'text-secondary';
             let messageSpinnerCls = 'text-secondary';
@@ -22,21 +17,21 @@
             let toolsDisplayCls = typing ? 'd-none' : '';
 
             switch (role) {
-                case Chat.ROLE_SYSTEM:
+                case window.Messages.ROLE_SYSTEM:
                     messageBorderCls = 'border-danger';
                     messageRoleCls = 'text-danger';
                     messageSpinnerCls = 'text-danger';
                     roleDisplay = 'System';
                     break;
 
-                case Chat.ROLE_USER:
+                case window.Messages.ROLE_USER:
                     messageBorderCls = 'border-success';
                     messageRoleCls = 'text-success';
                     messageSpinnerCls = 'text-success';
                     roleDisplay = 'User';
                     break;
 
-                case Chat.ROLE_ASSISTANT:
+                case window.Messages.ROLE_ASSISTANT:
                     messageBorderCls = 'border-primary';
                     messageRoleCls = 'text-primary';
                     messageSpinnerCls = 'text-primary';
@@ -44,11 +39,8 @@
                     break;
             }
 
-            const content = DOMPurify.sanitize(marked.parse(message));
-
             const el = document.createElement('div');
-            const elId = (this.lastMessageId++);
-            this.messageEls[elId] = el;
+            this.messageEls[id] = el;
 
             el.innerHTML = `
                 <div class="card m-3 chat-message ${messageBorderCls}">
@@ -59,7 +51,7 @@
                             </span>
                         </div>
                         <div class="chat-message-content">
-                            ${content}
+                            ${DOMPurify.sanitize(marked.parse(content))}
                         </div>
                         <div class="chat-message-typing text-end ${spinnerDisplayCls}">
                             <div class="spinner-border spinner-border-sm ${messageSpinnerCls}" role="status">
@@ -67,10 +59,10 @@
                             </div>
                         </div>
                         <div class="chat-message-tools text-end ${toolsDisplayCls}">
-                            <button type="button" class="btn btn-sm btn-outline-secondary border-0" title="Read message" onclick="">
+                            <button type="button" class="btn btn-sm btn-outline-secondary border-0" title="Read message" onclick="window.Messages.speak(${id})">
                                 <i class="bi bi-volume-up"></i>
                             </button>
-                            <button type="button" class="btn btn-sm btn-outline-secondary border-0" title="Copy to clipboard" onclick="">
+                            <button type="button" class="btn btn-sm btn-outline-secondary border-0" title="Copy to clipboard" onclick="window.Messages.copyToClipboard(${id})">
                                 <i class="bi bi-clipboard"></i>
                             </button>
                         </div>
@@ -84,11 +76,9 @@
                 left: 0,
                 smooth: 'auto',
             });
-
-            return elId;
         },
 
-        updateMessage(id, message, typing=false) {
+        updateMessage(id, content, typing=false) {
             if (!this.messageEls[id]) {
                 return;
             }
@@ -98,7 +88,7 @@
             const typingEl = el.querySelector('.chat-message-typing');
             const toolsEl = el.querySelector('.chat-message-tools');
 
-            contentEl.innerHTML = DOMPurify.sanitize(marked.parse(message));
+            contentEl.innerHTML = DOMPurify.sanitize(marked.parse(content));
 
             if (typing) {
                 typingEl.classList.remove('d-none');
