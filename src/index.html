@@ -90,6 +90,17 @@
                     </div>
                     <div class="modal-body">
                         <fieldset>
+                            <legend>UI</legend>
+                            <div class="form-floating mb-3">
+                                <select id="options-theme" class="form-select">
+                                    <option value="system">System</option>
+                                    <option value="light">Light</option>
+                                    <option value="dark">Dark</option>
+                                </select>
+                                <label for="options-theme">Color theme</label>
+                            </div>
+                        </fieldset>
+                        <fieldset>
                             <legend>Model</legend>
                             <div class="form-floating mb-3">
                                 <select id="options-model" class="form-select">
@@ -156,6 +167,7 @@
         <script src="node_modules/marked/marked.min.js"></script>
         <script src="js/ui/loading.js"></script>
         <script src="js/ui/options.js"></script>
+        <script src="js/ui/theme.js"></script>
         <script type="module" src="js/main.js"></script>
     </body>
 </html>

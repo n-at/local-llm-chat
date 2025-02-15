@@ -11,6 +11,7 @@
             top_k: 40,
             top_p: 0.9,
             min_p: 0.1,
+            theme: 'system',
         },
 
         options: {},
@@ -41,6 +42,7 @@
             document.getElementById('options-top-k').value = this.options.top_k;
             document.getElementById('options-top-p').value = this.options.top_p;
             document.getElementById('options-min-p').value = this.options.min_p;
+            document.getElementById('options-theme').value = this.options.theme;
         },
 
         gatherOptions() {
@@ -54,6 +56,7 @@
                 top_k: document.getElementById('options-top-k').value,
                 top_p: document.getElementById('options-top-p').value,
                 min_p: document.getElementById('options-min-p').value,
+                theme: document.getElementById('options-theme').value,
             };
         },
     };
