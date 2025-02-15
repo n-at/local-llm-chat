@@ -1,5 +1,6 @@
 #loading {
     position: absolute;
+    z-index: 99;
     top: 0;
     bottom: 0;
     left: 0;
@@ -8,6 +9,19 @@
 }
 #loading-spinner {
     margin-top: calc(50vh - 100px / 2 - (1.325rem + .9vw) / 2);
+}
+
+#prompt {
+    position: absolute;
+    z-index: 10;
+    bottom: 0.75rem;
+    left: 0;
+    right: 0;
+    overflow: hidden;
+}
+#prompt-input {
+    resize: none;
+    height: calc(.5rem + 2 * 38px);
 }
 
 /* Spinner */
