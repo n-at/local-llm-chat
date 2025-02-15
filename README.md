@@ -17,4 +17,5 @@ docker compose up -d
 * [twbs/icons](https://github.com/twbs/icons) - MIT
 * [ngxson/wllama](https://github.com/ngxson/wllama) - MIT
 * [markedjs/marked](https://github.com/markedjs/marked) - MIT
+* [cure53/DOMPurify](https://github.com/cure53/DOMPurify) - Apache-2.0
 * [tobiasahlin/SpinKit](https://github.com/tobiasahlin/SpinKit) - MIT
