@@ -1,4 +1,4 @@
-import { Wllama, LoggerWithoutDebug } from './node_modules/@wllama/wllama/esm/index.js';
+import { Wllama, LoggerWithoutDebug } from '../node_modules/@wllama/wllama/esm/index.js';
 
 const models = {
     'QVikhr-2.5-1.5B': {

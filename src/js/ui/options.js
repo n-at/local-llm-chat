@@ -1,25 +1,5 @@
 (() => {
 
-    window.Loading = {
-        el: null,
-        percEl: null,
-
-        init() {
-            this.el = document.getElementById('loading');
-            this.percEl = document.getElementById('loading-perc');
-        },
-
-        hide() {
-            this.el.remove();
-        },
-
-        perc(v) {
-            this.percEl.innerText = v;
-        },
-    };
-
-    ///////////////////////////////////////////////////////////////////////////
-
     window.Options = {
         defaultOptions: {
             model: 'QVikhr-2.5-1.5B',
@@ -78,9 +58,6 @@
         },
     };
 
-    ///////////////////////////////////////////////////////////////////////////
-
-    window.Loading.init();
     window.Options.init();
 
 })();
