@@ -83,7 +83,7 @@
         
         <!-- options screen -->
         <div id="options" class="modal" tabindex="-1">
-            <div class="modal-dialog">
+            <div class="modal-dialog modal-lg modal-fullscreen-md-down">
                 <div class="modal-content">
                     <div class="modal-header">
                         <h5 class="modal-title">Options</h5>
@@ -136,22 +136,90 @@
                             <div class="form-floating mb-3">
                                 <input type="number" id="options-temp" class="form-control" min="0" max="2" step="0.05" value="0.8" placeholder="temp">
                                 <label for="options-temp">Temperature</label>
+                                <div class="form-text">
+                                    <a href="https://github.com/ggml-org/llama.cpp/tree/master/examples/main#temperature" target="_blank"><i class="bi bi-question-circle"></i></a>
+                                    Adjust the randomness of the generated text
+                                </div>
+                            </div>
+                            <div class="form-floating mb-3">
+                                <input type="number" id="options-n-predict" class="form-control" min="-2" step="1" value="-1" placeholder="n_predict">
+                                <label for="options-n-predict">Number of tokens to predict</label>
+                                <div class="form-text">
+                                    <a href="https://github.com/ggml-org/llama.cpp/tree/master/examples/main#number-of-tokens-to-predict" target="_blank"><i class="bi bi-question-circle"></i></a>
+                                    Set the number of tokens to predict when generating text, -1 = infinity, -2 = until context filled
+                                </div>
                             </div>
                             <div class="form-floating mb-3">
                                 <input type="number" id="options-repeat-penalty" class="form-control" min="0" max="2" step="0.05" value="1.0" placeholder="repeat penalty">
                                 <label for="options-repeat-penalty">Repeat penalty</label>
+                                <div class="form-text">
+                                    <a href="https://github.com/ggml-org/llama.cpp/tree/master/examples/main#repeat-penalty" target="_blank"><i class="bi bi-question-circle"></i></a>
+                                    Control the repetition of token sequences in the generated text, 1.0 = disabled
+                                </div>
+                            </div>
+                            <div class="form-floating mb-3">
+                                <input type="number" id="options-repeat-last-n" class="form-control" min="-1" step="1" value="64" placeholder="repeat last N">
+                                <label for="options-repeat-last-n">Repeat last N</label>
+                                <div class="form-text">
+                                    <a href="https://github.com/ggml-org/llama.cpp/tree/master/examples/main#repeat-penalty" target="_blank"><i class="bi bi-question-circle"></i></a>
+                                    Last n tokens to consider for penalizing repetition, 0 = disabled, -1 = context size
+                                </div>
                             </div>
                             <div class="form-floating mb-3">
                                 <input type="number" id="options-top-k" class="form-control" min="1" max="200" step="1" value="40" placeholder="top_k">
                                 <label for="options-top-k">top_k</label>
+                                <div class="form-text">
+                                    <a href="https://github.com/ggml-org/llama.cpp/tree/master/examples/main#top-k-sampling" target="_blank"><i class="bi bi-question-circle"></i></a>
+                                    Limit the next token selection to the K most probable tokens
+                                </div>
                             </div>
                             <div class="form-floating mb-3">
                                 <input type="number" id="options-top-p" class="form-control" min="0" max="1", step="0.01" value="0.9" placeholder="top_p">
                                 <label for="options-top-p">top_p</label>
+                                <div class="form-text">
+                                    <a href="https://github.com/ggml-org/llama.cpp/tree/master/examples/main#top-p-sampling" target="_blank"><i class="bi bi-question-circle"></i></a>
+                                    Limit the next token selection to a subset of tokens with a cumulative probability above a threshold P
+                                </div>
                             </div>
-                            <div class="form-floating">
+                            <div class="form-floating mb-3">
                                 <input type="number" id="options-min-p" class="form-control" min="0" max="1" step="0.01" value="0.1" placeholder="min_p">
                                 <label for="options-min-p">min_p</label>
+                                <div class="form-text">
+                                    <a href="https://github.com/ggml-org/llama.cpp/tree/master/examples/main#min-p-sampling" target="_blank"><i class="bi bi-question-circle"></i></a>
+                                    Sets a minimum base probability threshold for token selection
+                                </div>
+                            </div>
+                            <div class="form-floating mb-3">
+                                <input type="number" id="options-typical" class="form-control" min="0" max="1" step="0.05" value="1.0" placeholder="locally typical">
+                                <label for="options-typical">Locally typical</label>
+                                <div class="form-text">
+                                    <a href="https://github.com/ggml-org/llama.cpp/tree/master/examples/main#locally-typical-sampling" target="_blank"><i class="bi bi-question-circle"></i></a>
+                                    Enable locally typical sampling with parameter p, 1.0 = disabled
+                                </div>
+                            </div>
+                            <div class="form-floating mb-3">
+                                <input type="number" id="options-mirostat" class="form-control" min="0" max="2" step="1" value="1" placeholder="mirostat">
+                                <label for="options-mirostat">Mirostat</label>
+                                <div class="form-text">
+                                    <a href="https://github.com/ggml-org/llama.cpp/tree/master/examples/main#mirostat-sampling" target="_blank"><i class="bi bi-question-circle"></i></a>
+                                    Enable Mirostat sampling, controlling perplexity during text generation, 0 = disabled, 1 = Mirostat, 2 = Mirostat 2.0
+                                </div>
+                            </div>
+                            <div class="form-floating mb-3">
+                                <input type="number" id="options-mirostat-eta" class="form-control" min="0" max="1" step="0.01" value="0.1" placeholder="mirostat_eta">
+                                <label for="options-mirostat-eta">Mirostat learning rate</label>
+                                <div class="form-text">
+                                    <a href="https://github.com/ggml-org/llama.cpp/tree/master/examples/main#mirostat-sampling" target="_blank"><i class="bi bi-question-circle"></i></a>
+                                    Mirostat learning rate, parameter eta
+                                </div>
+                            </div>
+                            <div class="form-floating">
+                                <input type="number" id="options-mirostat-tau" class="form-control" min="0" max="10" step="0.1" value="5.0" placeholder="mirostat_tau">
+                                <label for="options-mirostat-tau">Mirostat target entropy</label>
+                                <div class="form-text">
+                                    <a href="https://github.com/ggml-org/llama.cpp/tree/master/examples/main#mirostat-sampling" target="_blank"><i class="bi bi-question-circle"></i></a>
+                                    Mirostat target entropy, parameter tau
+                                </div>
                             </div>
                         </fieldset>
                     </div>

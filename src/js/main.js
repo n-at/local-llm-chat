@@ -35,20 +35,28 @@ function modelUrl(modelId) {
 
     window.Loading.hide();
 
-    // const messages = [
-    //     {role: 'system', content: options.system_prompt},
-    //     {role: 'user', content: 'Почему трава зеленая?'},
-    // ];
+    const messages = [
+        {role: 'system', content: options.system_prompt},
+        {role: 'user', content: 'Почему трава зеленая?'},
+    ];
 
     // console.log('THINKING...');
 
+    // const nPredict = parseInt(options.n_predict);
+
     // const output = await wllama.createChatCompletion(messages, {
+    //     nPredict: nPredict > 0 ? nPredict : undefined,
     //     sampling: {
-    //         temp: options.temp,
-    //         penalty_repeat: options.repeat_penalty,
-    //         top_k: options.top_k,
-    //         top_p: options.top_p,
-    //         min_p: options.min_p,
+    //         temp: parseFloat(options.temp),
+    //         penalty_repeat: parseFloat(options.repeat_penalty),
+    //         penalty_last_n: parseInt(options.repeat_last_n),
+    //         top_k: parseInt(options.top_k),
+    //         top_p: parseFloat(options.top_p),
+    //         min_p: parseFloat(options.min_p),
+    //         typical_p: parseFloat(options.typical),
+    //         mirostat: parseInt(options.mirostat),
+    //         mirostat_eta: parseFloat(options.mirostat_eta),
+    //         mirostat_tau: parseFloat(options.mirostat_tau),
     //     },
     // });
 
