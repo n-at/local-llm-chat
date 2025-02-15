@@ -9,10 +9,40 @@
         <link rel="stylesheet" href="main.css">
     </head>
     <body>
-        <h1>It works!</h1>
+        <!-- navbar -->
+        <nav class="navbar bg-body-tertiary">
+            <div class="container-fluid">
+                <span class="navbar-brand mb-0 h1">
+                    <i class="bi bi-chat text-primary"></i> local-llm-chat
+                </span>
+            </div>
+        </nav>
 
+        <!-- loading screen -->
+        <div id="loading">
+            <div id="loading-spinner">
+                <div class="sk-cube-grid">
+                    <div class="sk-cube sk-cube1"></div>
+                    <div class="sk-cube sk-cube2"></div>
+                    <div class="sk-cube sk-cube3"></div>
+                    <div class="sk-cube sk-cube4"></div>
+                    <div class="sk-cube sk-cube5"></div>
+                    <div class="sk-cube sk-cube6"></div>
+                    <div class="sk-cube sk-cube7"></div>
+                    <div class="sk-cube sk-cube8"></div>
+                    <div class="sk-cube sk-cube9"></div>
+                </div>
+            </div>
+            <div id="loading-text" class="text-center fs-2">
+                <span id="loading-perc">0</span>%
+            </div>
+        </div>
+    
+
+        <!-- script -->
         <script src="node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
         <script src="node_modules/marked/marked.min.js"></script>
+        <script src="ui.js"></script>
         <script type="module" src="main.js"></script>
     </body>
 </html>

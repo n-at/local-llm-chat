@@ -36,30 +36,29 @@ const currentSystemPrompt = 'You are helpful digital assistant.';
 
     const wllama = new Wllama(CONFIG_PATHS);
 
-    const progressCallback = ({loaded, total}) => {
-        const progressPercentage = Math.round((loaded / total) * 100);
-        console.log(`Downloading... ${progressPercentage}%`);
-    };
-
     await wllama.loadModelFromUrl(modelUrl(currentModelId), {
-        progressCallback,
+        progressCallback: ({loaded, total}) => {
+            window.Loading.perc(Math.round((loaded / total) * 100));
+        },
         logger: LoggerWithoutDebug,
     });
 
-    const messages = [
-        {role: 'system', content: currentSystemPrompt},
-        {role: 'user', content: 'Почему трава зеленая?'},
-    ];
+    window.Loading.hide();
 
-    console.log('THINKING...');
+    // const messages = [
+    //     {role: 'system', content: currentSystemPrompt},
+    //     {role: 'user', content: 'Почему трава зеленая?'},
+    // ];
 
-    const output = await wllama.createChatCompletion(messages, {
-        sampling: {
-            temp: 0.5,
-            top_k: 40,
-            top_p: 0.9,
-        },
-    });
+    // console.log('THINKING...');
 
-    console.log(`OUTPUT: ${output}`);
+    // const output = await wllama.createChatCompletion(messages, {
+    //     sampling: {
+    //         temp: 0.5,
+    //         top_k: 40,
+    //         top_p: 0.9,
+    //     },
+    // });
+
+    // console.log(`OUTPUT: ${output}`);
 })();

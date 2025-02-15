@@ -17,3 +17,4 @@ docker compose up -d
 * [twbs/icons](https://github.com/twbs/icons) - MIT
 * [ngxson/wllama](https://github.com/ngxson/wllama) - MIT
 * [markedjs/marked](https://github.com/markedjs/marked) - MIT
+* [tobiasahlin/SpinKit](https://github.com/tobiasahlin/SpinKit) - MIT
