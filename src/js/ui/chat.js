@@ -19,6 +19,7 @@
             let messageSpinnerCls = 'text-secondary';
             let roleDisplay = 'Unknown';
             let spinnerDisplayCls = typing ? '' : 'd-none';
+            let toolsDisplayCls = typing ? 'd-none' : '';
 
             switch (role) {
                 case Chat.ROLE_SYSTEM:
@@ -65,6 +66,14 @@
                                 <span class="visually-hidden">Typing message...</span>
                             </div>
                         </div>
+                        <div class="chat-message-tools text-end ${toolsDisplayCls}">
+                            <button type="button" class="btn btn-sm btn-outline-secondary border-0" title="Read message" onclick="">
+                                <i class="bi bi-volume-up"></i>
+                            </button>
+                            <button type="button" class="btn btn-sm btn-outline-secondary border-0" title="Copy to clipboard" onclick="">
+                                <i class="bi bi-clipboard"></i>
+                            </button>
+                        </div>
                     </div>
                 </div>
             `;
@@ -87,13 +96,16 @@
             const el = this.messageEls[id];
             const contentEl = el.querySelector('.chat-message-content');
             const typingEl = el.querySelector('.chat-message-typing');
+            const toolsEl = el.querySelector('.chat-message-tools');
 
             contentEl.innerHTML = DOMPurify.sanitize(marked.parse(message));
 
             if (typing) {
                 typingEl.classList.remove('d-none');
+                toolsEl.classList.add('d-none');
             } else {
                 typingEl.classList.add('d-none');
+                toolsEl.classList.remove('d-none');
             }
         },
 
