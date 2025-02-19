@@ -9,7 +9,7 @@
         },
 
         addMessage(id, role, content, typing=false) {
-            let messageBorderCls = 'border-secondary';
+            let messageBorderCls = '';
             let messageRoleCls = 'text-secondary';
             let messageSpinnerCls = 'text-secondary';
             let roleDisplay = 'Unknown';
@@ -18,21 +18,21 @@
 
             switch (role) {
                 case window.Messages.ROLE_SYSTEM:
-                    messageBorderCls = 'border-danger';
+                    messageBorderCls = '';
                     messageRoleCls = 'text-danger';
                     messageSpinnerCls = 'text-danger';
                     roleDisplay = 'System';
                     break;
 
                 case window.Messages.ROLE_USER:
-                    messageBorderCls = 'border-success';
+                    messageBorderCls = '';
                     messageRoleCls = 'text-success';
                     messageSpinnerCls = 'text-success';
                     roleDisplay = 'User';
                     break;
 
                 case window.Messages.ROLE_ASSISTANT:
-                    messageBorderCls = 'border-primary';
+                    messageBorderCls = '';
                     messageRoleCls = 'text-primary';
                     messageSpinnerCls = 'text-primary';
                     roleDisplay = 'Assistant';
