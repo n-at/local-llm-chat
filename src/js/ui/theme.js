@@ -4,7 +4,7 @@
     const ThemeLight = 'light';
     const ThemeDark = 'dark';
 
-    const currentTheme = window.Options.options.theme;
+    const currentTheme = window.Options.get().theme;
 
     function applyTheme(theme) {
         const html = document.getElementsByTagName('html')[0];

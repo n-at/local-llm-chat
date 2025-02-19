@@ -69,7 +69,7 @@
 
         clear() {
             this.messages.forEach(message => {
-                this.Chat.deleteMessage(message.id);
+                window.Chat.deleteMessage(message.id);
             });
 
             this.messages = [];
@@ -77,6 +77,15 @@
         },
 
         ///
+
+        getAsChatLog() {
+            return this.messages.map(elem => {
+                return {
+                    role: elem.role,
+                    content: elem.content,
+                };
+            });
+        },
 
         copyToClipboard(id) {
             const message = this.getMessageById(id);
@@ -105,7 +114,7 @@
         },
 
         addSystemPrompt() {
-            this.add(window.Messages.ROLE_SYSTEM, window.Options.options.system_prompt, false);
+            this.add(window.Messages.ROLE_SYSTEM, window.Options.get().system_prompt, false);
         },
     };
 

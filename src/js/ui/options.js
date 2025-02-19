@@ -77,6 +77,10 @@
                 theme: document.getElementById('options-theme').value,
             };
         },
+
+        get() {
+            return Object.assign({}, this.options);
+        },
     };
 
     window.Options.init();
