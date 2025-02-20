@@ -1,5 +1,6 @@
 import Chat from './ui/chat.mjs';
 import Options from './ui/options.mjs';
+import TTS from './tts.mjs';
 
 const MessageTypes = {
     ROLE_SYSTEM: 'system',
@@ -114,7 +115,14 @@ const Messages = {
         if (!message) {
             return;
         }
-        console.log('Speaking...'); //TODO TTS
+        
+        const el = document.createElement('div');
+        el.innerHTML = DOMPurify.sanitize(marked.parse(message.content));
+        
+        const text = el.innerText;
+        el.remove();
+
+        TTS.speak(text);
     },
 
     addSystemPrompt() {

@@ -1,3 +1,4 @@
+import Messages from '../messages.mjs';
 import { MessageTypes } from '../messages.mjs';
 
 let containerEl = null;
@@ -58,10 +59,10 @@ const Chat = {
                         </div>
                     </div>
                     <div class="chat-message-tools text-end ${toolsDisplayCls}">
-                        <button type="button" class="btn btn-sm btn-outline-secondary border-0" title="Read message">
+                        <button type="button" class="btn btn-sm btn-outline-secondary border-0 btn-message-tts" title="Read message">
                             <i class="bi bi-volume-up"></i>
                         </button>
-                        <button type="button" class="btn btn-sm btn-outline-secondary border-0" title="Copy to clipboard">
+                        <button type="button" class="btn btn-sm btn-outline-secondary border-0 btn-message-clipboard" title="Copy to clipboard">
                             <i class="bi bi-clipboard"></i>
                         </button>
                     </div>
@@ -69,8 +70,12 @@ const Chat = {
             </div>
         `;
 
-        //TODO onclick="window.Messages.speak(${id})"
-        //TODO onclick="window.Messages.copyToClipboard(${id})"
+        el.querySelector('.btn-message-tts').addEventListener('click', () => {
+            Messages.speak(id);
+        });
+        el.querySelector('.btn-message-clipboard').addEventListener('click', () => {
+            Messages.copyToClipboard(id);
+        });
 
         messageEls[id] = el;
         containerEl.append(el);
