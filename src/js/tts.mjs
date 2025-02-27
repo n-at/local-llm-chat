@@ -4,10 +4,11 @@ import Options from './ui/options.mjs';
 
 let voices = {};
 let pitch = 1;
-let rate = 0.75;
+let rate = 1.15;
 let volume = 1;
-let utterance = null;
 let lang = null;
+
+let queue = [];
 
 ///////////////////////////////////////////////////////////////////////////////
 
@@ -29,6 +30,24 @@ function voiceExists(lang) {
     return !!voices[lang];
 }
 
+function queueNext() {
+    if (queue.length == 0) {
+        return;
+    }
+    
+    const text = queue.shift();
+    const utterance = new SpeechSynthesisUtterance(text);
+    utterance.pitch = pitch;
+    utterance.rate = rate;
+    utterance.volume = volume;
+    utterance.voice = voices[lang];
+    utterance.lang = voices[lang].lang;
+    utterance.addEventListener('end', () => {
+        queueNext();
+    });
+    window.speechSynthesis.speak(utterance);
+}
+
 ///////////////////////////////////////////////////////////////////////////////
 
 const TTS = {
@@ -43,26 +62,23 @@ const TTS = {
         lang = Options.get().speak_lang
     },
 
-    speak(text) {
-        if (window.speechSynthesis.speaking) {
-            this.stop();
+    speak(text, addToQueue=false) {
+        if (!addToQueue) {
+            queue = [];
+            if (this.speaking()) {
+                this.stop();
+            }
         }
-        if (!voiceExists(lang)) {
-            return;
+
+        queue.push(text);
+        
+        if (!this.speaking()) {
+            queueNext();
         }
-        utterance = new SpeechSynthesisUtterance(text);
-        utterance.pitch = pitch;
-        utterance.rate = rate;
-        utterance.volume = volume;
-        utterance.voice = voices[lang];
-        utterance.lang = voices[lang].lang;
-        utterance.text = text;
-        window.speechSynthesis.speak(utterance);
-    } ,
+    },
     
     stop() {
         window.speechSynthesis.cancel();
-        utterance = null;
     },
 
     speaking() {
@@ -78,23 +94,14 @@ const TTS = {
 
     setPitch(value) {
         pitch = value;
-        if (utterance) {
-            utterance.pitch = value;
-        }
     },
 
     setRate(value) {
         rate = value;
-        if (utterance) {
-            utterance.rate = value;
-        }
     },
 
     setVolume(value) {
         volume = value;
-        if (utterance) {
-            utterance.volume = value;
-        }
     },
 };
 

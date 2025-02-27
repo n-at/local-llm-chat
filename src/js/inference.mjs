@@ -4,6 +4,7 @@ import Prompt from './ui/prompt.mjs';
 import Loading from './ui/loading.mjs';
 import Messages from './messages.mjs';
 import {MessageTypes} from './messages.mjs';
+import TTS from './tts.mjs';
 
 ///////////////////////////////////////////////////////////////////////////////
 
@@ -85,17 +86,26 @@ const Inference = {
         const chatHistory = Messages.getAsChatLog();
         const inferenceOptions = getInferenceOptions();
 
+        let previousTokenText = '';
         let previousText = '';
 
-        inferenceOptions.onNewToken = (t, p, currentText, options) => {
-            const diff = currentText.substring(previousText.length);
+        inferenceOptions.onNewToken = (t, p, currentTokenText, options) => {
+            const diff = currentTokenText.substring(previousTokenText.length);
             const dotPosition = diff.indexOf('.');
             if (dotPosition >= 0) {
-                const newText = previousText + diff.substring(0, dotPosition + 1);
-                Messages.update(assistantMessageId, newText, true);
+                const addText = diff.substring(0, dotPosition + 1);
+                const nextText = previousTokenText + addText;
+                Messages.update(assistantMessageId, nextText, true);
+            
+                if (Options.getSpeak()) {
+                    const speakText = nextText.substring(previousText.length);
+                    TTS.speak(speakText, true);
+                }
+
+                previousText = nextText;
             }
             
-            previousText = currentText;
+            previousTokenText = currentTokenText;
 
             if (cancel) {
                 options.abortSignal();

@@ -15,11 +15,16 @@ const DefaultOptions = {
     mirostat_tau: 5.0,
     mirostat_eta: 0.1,
     theme: 'system',
+    speak: false,
 };
 
 const SettingsOffset = 'local-llm-chat-options';
 
+///////////////////////////////////////////////////////////////////////////////
+
 let options = {};
+
+///////////////////////////////////////////////////////////////////////////////
 
 function gatherOptions() {
     return {
@@ -42,10 +47,17 @@ function gatherOptions() {
     };
 }
 
+function save() {
+    const optionsToSave = Object.assign({}, options, gatherOptions());
+    window.localStorage[SettingsOffset] = JSON.stringify(optionsToSave);
+}
+
+///////////////////////////////////////////////////////////////////////////////
+
 const Options = {
     init() {
         document.getElementById('options-save').addEventListener('click', () => {
-            window.localStorage[SettingsOffset] = JSON.stringify(gatherOptions());
+            save();
             window.location.reload();
         });
 
@@ -80,6 +92,14 @@ const Options = {
 
     get() {
         return Object.assign({}, options);
+    },
+
+    setSpeak(value) {
+        options.speak = !!value;
+        save();
+    },
+    getSpeak() {
+        return options.speak;
     },
 };
 
