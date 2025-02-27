@@ -42,6 +42,9 @@ const Prompt = {
                 speakEl.classList.add('active');
             }
         });
+        if (Options.getSpeak()) {
+            speakEl.classList.add('active');
+        }
 
         document.getElementById('prompt-clear').addEventListener('click', () => {
             Inference.cancelCompletion();

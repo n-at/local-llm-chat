@@ -24,6 +24,8 @@ const Models = {
     },
 };
 
+const NextTextCharLimit = 20;
+
 ///////////////////////////////////////////////////////////////////////////////
 
 let wllama = null;
@@ -90,11 +92,23 @@ const Inference = {
         let previousText = '';
 
         inferenceOptions.onNewToken = (t, p, currentTokenText, options) => {
-            const diff = currentTokenText.substring(previousTokenText.length);
-            const dotPosition = diff.indexOf('.');
-            if (dotPosition >= 0) {
-                const addText = diff.substring(0, dotPosition + 1);
-                const nextText = previousTokenText + addText;
+            const tokenDiff = currentTokenText.substring(previousTokenText.length);
+            const tokenDotPosition = tokenDiff.indexOf('.');
+            let nextText = '';
+
+            if (tokenDotPosition >= 0) {
+                nextText = previousTokenText + tokenDiff.substring(0, tokenDotPosition + 1);
+            } else if (currentTokenText.length - previousText.length >= NextTextCharLimit) {
+                const diff = currentTokenText.substring(previousText.length, previousText.length + NextTextCharLimit);
+                const diffSpacePosition = diff.lastIndexOf(' ');
+                if (diffSpacePosition >= 0) {
+                    nextText = previousText + diff.substring(0, diffSpacePosition);
+                } else {
+                    nextText = previousText + diff;
+                }
+            }
+
+            if (nextText.length > 0) {
                 Messages.update(assistantMessageId, nextText, true);
             
                 if (Options.getSpeak()) {

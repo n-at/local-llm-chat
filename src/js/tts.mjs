@@ -4,7 +4,7 @@ import Options from './ui/options.mjs';
 
 let voices = {};
 let pitch = 1;
-let rate = 1.15;
+let rate = 1.0;
 let volume = 1;
 let lang = null;
 
