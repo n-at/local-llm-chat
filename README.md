@@ -1,5 +1,9 @@
 # local-llm-chat
 
+Simple LLM chat inside browser.
+
+## Run
+
 ```bash
 mkdir -m 0777 logs src/models
 
@@ -12,6 +16,13 @@ rm "./src/models/Phi-3.5-mini-instruct-Q4_K_M.gguf"
 cd src && npm install && cd ..
 
 docker compose up -d
+```
+
+## docker image
+
+```bash
+docker image build -t local-llm-chat:latest .
+docker run -d -p 8888:80 local-llm-chat:latest
 ```
 
 ## Uses
