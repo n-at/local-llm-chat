@@ -9,8 +9,8 @@ import TTS from './tts.mjs';
 ///////////////////////////////////////////////////////////////////////////////
 
 const WllamaConfigPaths = {
-    'single-thread/wllama.wasm': '../node_modules/@wllama/wllama/esm/single-thread/wllama.wasm',
-    'multi-thread/wllama.wasm' : '../node_modules/@wllama/wllama/esm/multi-thread/wllama.wasm',
+    'single-thread/wllama.wasm': 'node_modules/@wllama/wllama/esm/single-thread/wllama.wasm',
+    'multi-thread/wllama.wasm' : 'node_modules/@wllama/wllama/esm/multi-thread/wllama.wasm',
 };
    
 const Models = {
