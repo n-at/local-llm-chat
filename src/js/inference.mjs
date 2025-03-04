@@ -37,7 +37,8 @@ function getModelUrl(modelId) {
     if (!Models[modelId]) {
         return null;
     }
-    return `${location.origin}/models/${Models[modelId].file}`;
+    const path = location.pathname.endsWith('/') ? location.pathname.substring(0, location.pathname.length-1) : location.pathname;
+    return `${location.origin + path}/models/${Models[modelId].file}`;
 };
 
 function getInferenceOptions() {
