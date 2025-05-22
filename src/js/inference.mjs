@@ -18,6 +18,10 @@ const Models = {
         file: 'QVikhr-2.5-1.5B-Instruct-SMPO-Q4_K_M.gguf',
         quant: 'Q4_K_M',
     },
+    'Qwen3-0.6B': {
+        file: 'Qwen3-0.6B-Q4_K_M.gguf',
+        quant: 'Q4_K_M',
+    },
     'Phi-3.5-mini-instruct': {
         file: 'Phi-3.5-mini-instruct-Q4_K_M-00001-of-00005.gguf',
         quant: 'Q4_K_M',

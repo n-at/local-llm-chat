@@ -9,6 +9,8 @@ mkdir -m 0777 logs src/models
 
 wget -O "src/models/QVikhr-2.5-1.5B-Instruct-SMPO-Q4_K_M.gguf" "https://huggingface.co/Vikhrmodels/QVikhr-2.5-1.5B-Instruct-SMPO_GGUF/resolve/main/QVikhr-2.5-1.5B-Instruct-SMPO-Q4_K_M.gguf?download=true"
 
+wget -O "src/models/Qwen3-0.6B-Q4_K_M.gguf" "https://huggingface.co/bartowski/Qwen_Qwen3-0.6B-GGUF/resolve/main/Qwen_Qwen3-0.6B-Q4_K_M.gguf?download=true"
+
 wget -O "src/models/Phi-3.5-mini-instruct-Q4_K_M.gguf" "https://huggingface.co/bartowski/Phi-3.5-mini-instruct-GGUF/resolve/main/Phi-3.5-mini-instruct-Q4_K_M.gguf?download=true"
 docker run --rm -it -v $(pwd):/data --entrypoint "/app/llama-gguf-split" "ghcr.io/ggml-org/llama.cpp:full" --split-max-size 512M "/data/src/models/Phi-3.5-mini-instruct-Q4_K_M.gguf" "/data/src/models/Phi-3.5-mini-instruct-Q4_K_M"
 rm "./src/models/Phi-3.5-mini-instruct-Q4_K_M.gguf"
@@ -28,6 +30,7 @@ docker run -d -p 8888:80 local-llm-chat:latest
 ## Uses
 
 * [Vikhrmodels/QVikhr-2.5-1.5B-Instruct-SMPO](https://huggingface.co/Vikhrmodels/QVikhr-2.5-1.5B-Instruct-SMPO_GGUF) - Apache-2.0
+* [Qwen/Qwen3-0.6B](https://huggingface.co/Qwen/Qwen3-0.6B) - Apache-2.0
 * [microsoft/Phi-3.5-mini-instruct](https://huggingface.co/microsoft/Phi-3.5-mini-instruct) - MIT
 * [twbs/bootstrap](https://github.com/twbs/bootstrap) - MIT
 * [twbs/icons](https://github.com/twbs/icons) - MIT

@@ -5,6 +5,7 @@ RUN apt-get update &&\
     mkdir /data &&\
     cd /data &&\
     wget -O "QVikhr-2.5-1.5B-Instruct-SMPO-Q4_K_M.gguf" "https://huggingface.co/Vikhrmodels/QVikhr-2.5-1.5B-Instruct-SMPO_GGUF/resolve/main/QVikhr-2.5-1.5B-Instruct-SMPO-Q4_K_M.gguf?download=true" &&\
+    wget -O "src/models/Qwen3-0.6B-Q4_K_M.gguf" "https://huggingface.co/bartowski/Qwen_Qwen3-0.6B-GGUF/resolve/main/Qwen_Qwen3-0.6B-Q4_K_M.gguf?download=true" &&\
     wget -O "Phi-3.5-mini-instruct-Q4_K_M.gguf" "https://huggingface.co/bartowski/Phi-3.5-mini-instruct-GGUF/resolve/main/Phi-3.5-mini-instruct-Q4_K_M.gguf?download=true"
 ADD src /app
 RUN cd /app && npm install
